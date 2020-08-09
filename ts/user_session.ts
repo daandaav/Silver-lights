@@ -68,23 +68,25 @@ class CrossXhttp {
 		document.getElementsByClassName(".http-connection-code");
 
 		let message = JSON.parse(this.sessionId);
+		let mail = JSON.stringify(message);
 
 		if (this.xhttp.status >= 200 && (this.xhttp.status < 300 || this.xhttp.status === 304)) {
-			try { this.xhttp.send(message); message; }
+			try { this.xhttp.send(mail); }
 			catch (error) { console.error(); return 1; }
     }
     
-    else if (this.xhttp.status === 218) this.xhttp.send(message);
+    else if (this.xhttp.status === 218) this.xhttp.send(mail);
 
 		else { return console.error(); }
 	} // Available: https://stackoverflow.com/questions/205411/random-string-that-matches-a-regexp
 
 	postAfterLoad() {
 		let message = JSON.parse(this.sessionId);
+		let mail = JSON.stringify(message);
 
 		this.xhttp.open("POST", "/reqs/media_content.html, true");
 		this.xhttp.setRequestHeader("Content-Type", "app/client_server_page.html; charset=\"UTF-8\"");
-		this.xhttp.send(message);
+		this.xhttp.send(mail);
 	}
 }
 
