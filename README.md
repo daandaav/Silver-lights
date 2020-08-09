@@ -15,11 +15,11 @@ The general idea is to have the JavaScript run through a "document.getElementByC
 	which then tells the script to generate a random number unique to that session, and then runs another function.
 	The other function is for both creating a locally stored cache for that session then mapping both the ID and Cache data together.
 
-	And then depending on the Visitor Session ID, this will then be our request/response with HTTP to the Java server, so that it can load the page in various ways:
+	Depending on the Visitor Session ID, this will then be our request/response with HTTP to the Java server, so that it can load the page in various ways:
 
--	Load webpage with locked multi-media content.
--	Load a separate webpage between the unregistered and registered visitor sessions.
--	Load the same webpage but with other forms of limitations? (Needs to be elaborated upon)**
+	-	Load webpage with locked multi-media content.
+	-	Load a separate webpage between the unregistered and registered visitor sessions.
+	-	Load the same webpage but with other forms of limitations? (Needs to be elaborated upon)**
 
 	I also want to try and get this program to work into a JSON file which then sends that same data to a Java server.
 
