@@ -7,8 +7,11 @@
  * General idea of what I'm trying to achieve: http://youmightnotneedjquery.com/#json
 */
 
+import { match } from "assert";
 import * as http from "http";
 import { Http2Server, Http2ServerRequest, Http2ServerResponse } from "http2";
+
+const cache = require("caches");
 
 class UserSession {
 	private sessionId: string;
@@ -33,7 +36,7 @@ class UserSession {
   }
   
   initializeCaching() {
-    let locallyStoreCache = new Storage;
+    let locallyStoredCache = window.localStorage;
 
     let urls = ["/api/get/config?visitor=" + this.generateRng, "/api/get/visitorcache"];
 
@@ -43,8 +46,38 @@ class UserSession {
 
     let sCache = "\"" + sessionCached + "\"";
 	
-	return locallyStoreCache.setItem(this.generateRng(), sCache);
+	return locallyStoredCache.setItem(this.generateRng(), sCache);
   } // Available: https://medium.com/javascript-dots/cache-api-in-javascript-644380391681
+
+  cacheResponseAsJson() {
+	  let locallyStoredCache = window.localStorage;
+
+		let data = JSON.parse(this.sessionCache);
+		let item = JSON.stringify(data);
+
+	  let response = cache.put("/local_cache.json", new Response("{\"localCachedId\" : "+ item +" "));
+
+	  response
+  }
+
+  cacheRequesForJson() {
+		let request = new Request("/cached_data_items/local_cache.json");
+
+		let requestToJson = JSON.stringify(request);
+
+		let options = {
+			headers: {
+				"Content-Type": "application/json",
+			}
+		}
+
+		let responseAsJson = new Response("{}", options);
+		let message = JSON.stringify(responseAsJson);
+
+		let matchResponse = message.match(requestToJson);
+
+		matchResponse
+	}
 
 
 } // Available: https://stackoverflow.com/questions/205411/random-string-that-matches-a-regexp
@@ -90,7 +123,7 @@ class CrossXhttp {
 	}
 }
 
-class UrlUri {
+class WebsiteDomain {
 
 	hostnamePathing = {
 		hostname: "silverlights.amstel.net",
