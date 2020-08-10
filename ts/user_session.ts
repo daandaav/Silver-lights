@@ -32,7 +32,7 @@ class UserSession {
 
     let sId = "\"" + rng + "\""
 
-		return sId;
+	return sId;
   }
   
   initializeCaching() {
@@ -57,7 +57,7 @@ class UserSession {
 
 	  let response = cache.put("/local_cache.json", new Response("{\"localCachedId\" : "+ item +" "));
 
-	  response
+	  return response;
   }
 
   cacheRequesForJson() {
@@ -76,7 +76,7 @@ class UserSession {
 
 		let matchResponse = message.match(requestToJson);
 
-		matchResponse
+		return matchResponse;
 	}
 
 
